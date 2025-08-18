@@ -41,12 +41,12 @@ export function TablePagination<T>({
 					entity="itemsPerPage"
 					translatedEntity="Items por página"
 					defaultValue={String(pagination.pageSize)}
-					onChange={(value: string) =>
+					onChange={(value: string) => {
 						table.setPagination({
 							pageIndex: 0,
 							pageSize: Number(value),
-						})
-					}
+						});
+					}}
 				/>
 			</div>
 

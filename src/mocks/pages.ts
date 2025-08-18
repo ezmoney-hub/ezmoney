@@ -1,4 +1,5 @@
 import {
+	BarChart,
 	CreditCard,
 	Landmark,
 	LayoutDashboard,
@@ -34,6 +35,11 @@ export const pages = [
 		href: "/orcamentos",
 		icon: PiggyBank,
 		label: "Orçamentos",
+	},
+	{
+		href: "/relatorios",
+		icon: BarChart,
+		label: "Relatórios",
 	},
 	{
 		href: "/categorias",

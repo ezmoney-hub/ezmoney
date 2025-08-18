@@ -72,6 +72,9 @@ export function Combobox({
 									key={item.value}
 									value={item.value}
 									onSelect={(currentValue: string) => {
+										if (currentValue === value) {
+											return;
+										}
 										setValue(currentValue === value ? "" : currentValue);
 										setOpen(false);
 										onChange?.(currentValue);

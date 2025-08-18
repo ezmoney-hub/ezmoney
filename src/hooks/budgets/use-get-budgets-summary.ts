@@ -4,7 +4,7 @@ import { useGetBankAccounts } from "../bank-accounts/use-get-bank-accounts";
 import { useGetInvoices } from "../invoices/use-get-invoices";
 import { useGetTransactionsSummary } from "../transactions/use-get-transactions-summary";
 
-export function useGetBudgetsSummary() {
+export function useGetReportsSummary() {
 	const {
 		summary: transactionsSummary,
 		isLoadingSummary: isLoadingTransactions,

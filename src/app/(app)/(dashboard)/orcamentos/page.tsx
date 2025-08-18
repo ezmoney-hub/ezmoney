@@ -1,12 +1,5 @@
-import { BudgetCharts } from "@/components/budgets/charts/charts";
-import { BudgetsSummary } from "@/components/budgets/summary/summary";
+import { BudgetsTableContainer } from "@/components/budgets/table/container";
 
 export default function Orcamentos() {
-	return (
-		<div className="w-full space-y-6">
-			<BudgetsSummary />
-
-			<BudgetCharts />
-		</div>
-	);
+	return <BudgetsTableContainer />;
 }

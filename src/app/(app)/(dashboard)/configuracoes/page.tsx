@@ -1,5 +1,5 @@
 import SettingsContainer from "@/components/settings/container";
 
-export default function Configuracoes() {
+export default function Settings() {
 	return <SettingsContainer />;
 }

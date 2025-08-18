@@ -1,13 +1,14 @@
 import { Bell, CreditCard, Lock, User } from "lucide-react";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
+import { Profile } from "./profile";
 import { SettingsTrigger } from "./trigger";
 
 export default function SettingsContainer() {
 	return (
-		<Tabs defaultValue="tab-1" className="items-center">
+		<Tabs defaultValue="tab-1" className="items-center w-full">
 			<TabsList
-				className="text-foreground h-auto gap-2 rounded-none border-b bg-transparent
-			px-0 py-1"
+				className="text-foreground h-auto gap-2 rounded-none bg-transparent
+			px-0 py-1 self-start"
 			>
 				<SettingsTrigger value="tab-1" icon={<User />}>
 					Perfil
@@ -28,8 +29,10 @@ export default function SettingsContainer() {
 
 			<TabsContent
 				value="tab-1"
-				className="animate-in fade-in-50 slide-in-from-bottom-2 duration-300"
-			></TabsContent>
+				className="animate-in fade-in-50 slide-in-from-bottom-2 duration-300 w-full"
+			>
+				<Profile />
+			</TabsContent>
 
 			<TabsContent
 				value="tab-2"
