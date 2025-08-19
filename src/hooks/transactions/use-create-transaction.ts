@@ -13,6 +13,7 @@ export const createTransactionRequestSchema = z.object({
 	amount: z.number().min(0.01, "O valor deve ser maior que zero"),
 	type: z.enum(["INCOME", "EXPENSE"]),
 	bankAccountId: z.string().min(1, "A conta bancária é obrigatória"),
+	categoryId: z.string().min(1, "A categoria é obrigatória"),
 });
 
 export type CreateTransactionRequest = z.infer<
@@ -58,6 +59,7 @@ export function useCreateTransaction() {
 			type: "EXPENSE",
 			bankAccountId: "",
 			date: new Date().toISOString(),
+			categoryId: "",
 		},
 		onSubmit: (data) => {
 			createTransactionFn(data);

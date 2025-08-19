@@ -139,7 +139,6 @@ export type UpdateCustomerMutationRequest = {
    */
   description?: string
   /**
-   * @minLength 1
    * @type string | undefined
    */
   phone?: string

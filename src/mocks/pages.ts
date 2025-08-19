@@ -32,6 +32,11 @@ export const pages = [
 		label: "Contas",
 	},
 	{
+		href: "/clientes",
+		icon: Users,
+		label: "Clientes",
+	},
+	{
 		href: "/orcamentos",
 		icon: PiggyBank,
 		label: "Orçamentos",
@@ -46,12 +51,6 @@ export const pages = [
 		icon: Tag,
 		label: "Categorias",
 	},
-	{
-		href: "/clientes",
-		icon: Users,
-		label: "Clientes",
-	},
-
 	{
 		href: "/configuracoes",
 		icon: Settings,

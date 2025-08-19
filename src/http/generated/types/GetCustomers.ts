@@ -43,7 +43,7 @@ export type GetCustomers200 = {
       /**
        * @type string
        */
-      email: string
+      email: string | null
       /**
        * @type string
        */
@@ -51,7 +51,7 @@ export type GetCustomers200 = {
       /**
        * @type string
        */
-      phone: string
+      phone: string | null
       /**
        * @type boolean
        */

@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
+import { queryClient } from "@/lib/react-query";
 
 interface AuthState {
 	accessToken: string | null;
@@ -12,6 +13,8 @@ export const useAuthStore = create<AuthState>()((set) => ({
 	accessToken: null,
 	isAuthenticated: false,
 	authenticate: (token: string) => {
+		queryClient.clear();
+
 		Cookies.set("ezmoney-access-token", token, {
 			expires: 1 / 24,
 			secure: process.env.NODE_ENV === "production",
@@ -24,6 +27,8 @@ export const useAuthStore = create<AuthState>()((set) => ({
 		});
 	},
 	logout: (callback?: () => void) => {
+		queryClient.clear();
+
 		Cookies.remove("ezmoney-access-token");
 
 		set({

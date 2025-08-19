@@ -97,18 +97,17 @@ export type CreateCustomerMutationRequest = {
    */
   name: string
   /**
-   * @type string, email
+   * @type string | undefined, email
    */
-  email: string
+  email?: string
   /**
    * @type string | undefined
    */
   description?: string
   /**
-   * @minLength 1
-   * @type string
+   * @type string | undefined
    */
-  phone: string
+  phone?: string
 }
 
 export type CreateCustomerMutationResponse = CreateCustomer201

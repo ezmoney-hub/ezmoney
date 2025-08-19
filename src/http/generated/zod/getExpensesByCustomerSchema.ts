@@ -24,7 +24,7 @@ export const getExpensesByCustomer200Schema = z
       z.object({
         id: z.string(),
         customer: z.string(),
-        email: z.string(),
+        email: z.string().nullable(),
         value: z.number(),
       }),
     ),

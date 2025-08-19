@@ -17,9 +17,9 @@ export const getCustomers200Schema = z
         z.object({
           id: z.string(),
           name: z.string(),
-          email: z.string(),
+          email: z.string().nullable(),
           description: z.string().nullable(),
-          phone: z.string(),
+          phone: z.string().nullable(),
           isActive: z.boolean(),
           createdAt: z.string().datetime(),
           updatedAt: z.string().datetime(),

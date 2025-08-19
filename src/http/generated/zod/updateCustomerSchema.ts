@@ -61,7 +61,7 @@ export const updateCustomerMutationRequestSchema = z
     name: z.string().min(1).optional(),
     email: z.string().email().optional(),
     description: z.string().optional(),
-    phone: z.string().min(1).optional(),
+    phone: z.string().optional(),
   })
   .describe('Update customer request body')
 

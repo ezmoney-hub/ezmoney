@@ -54,7 +54,7 @@ export type GetExpensesByCustomer200 = {
     /**
      * @type string
      */
-    email: string
+    email: string | null
     /**
      * @type number
      */

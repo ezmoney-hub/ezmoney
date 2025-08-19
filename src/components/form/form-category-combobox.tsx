@@ -29,11 +29,12 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { useCreateCategory } from "@/hooks/categories/use-create-category";
+import { useGetCategories } from "@/http/generated";
 import { cn } from "@/lib/utils";
 import { generateHexColor } from "@/utils/generate-hex-color";
+import { FormInputSkeleton } from "./form-input-sleleton";
 
 interface ComboboxProps<TFieldValues extends FieldValues> {
-	options: { label: string; value: string; color: string }[];
 	translatedEntity: string;
 	placeholder?: string;
 	emptyMessage?: string;
@@ -42,7 +43,6 @@ interface ComboboxProps<TFieldValues extends FieldValues> {
 }
 
 export function FormCategoryCombobox<TFieldValues extends FieldValues>({
-	options,
 	form,
 	entity,
 	translatedEntity,
@@ -53,6 +53,8 @@ export function FormCategoryCombobox<TFieldValues extends FieldValues>({
 	const [hasRequestedCreate, setHasRequestedCreate] = useState(false);
 
 	const { createCategory, isLoadingCreateCategory } = useCreateCategory();
+	const { data: categories, isLoading: isLoadingGetCategories } =
+		useGetCategories();
 
 	const color = generateHexColor();
 
@@ -71,6 +73,16 @@ export function FormCategoryCombobox<TFieldValues extends FieldValues>({
 			setSearch("");
 		}
 	}, [isLoadingCreateCategory, hasRequestedCreate]);
+
+	if (isLoadingGetCategories) {
+		return (
+			<FormInputSkeleton label="Categoria" message="Carregando categorias" />
+		);
+	}
+
+	if (!categories || categories.data.categories.length === 0) {
+		return null;
+	}
 
 	return (
 		<FormField
@@ -97,15 +109,16 @@ export function FormCategoryCombobox<TFieldValues extends FieldValues>({
 											<div
 												className="w-3 h-3 rounded-full"
 												style={{
-													backgroundColor: options.find(
-														(option) => option.value === field.value
+													backgroundColor: categories.data.categories.find(
+														(option) => option.id === field.value
 													)?.color,
 												}}
 											/>
 										)}
 										{field.value
-											? options.find((option) => option.value === field.value)
-													?.label
+											? categories.data.categories.find(
+													(option) => option.id === field.value
+											  )?.name
 											: `Selecionar ${translatedEntity}`}
 									</div>
 									<ChevronsUpDown className="opacity-50" size={16} />
@@ -151,12 +164,12 @@ export function FormCategoryCombobox<TFieldValues extends FieldValues>({
 									</CommandEmpty>
 
 									<CommandGroup>
-										{options.map((option) => (
+										{categories.data.categories.map((option) => (
 											<CommandItem
-												value={option.label}
-												key={option.value}
+												value={option.name}
+												key={option.id}
 												onSelect={() => {
-													field.onChange(option.value);
+													field.onChange(option.id);
 													setOpen(false);
 												}}
 											>
@@ -164,11 +177,11 @@ export function FormCategoryCombobox<TFieldValues extends FieldValues>({
 													className="w-3 h-3 rounded-full"
 													style={{ backgroundColor: option.color }}
 												/>
-												{option.label}
+												{option.name}
 												<Check
 													className={cn(
 														"ml-auto",
-														option.value === field.value
+														option.id === field.value
 															? "opacity-100"
 															: "opacity-0"
 													)}

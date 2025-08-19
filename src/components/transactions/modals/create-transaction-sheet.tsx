@@ -1,5 +1,6 @@
 "use client";
 import { Plus } from "lucide-react";
+import { FormCategoryCombobox } from "@/components/form/form-category-combobox";
 import { FormDatePicker } from "@/components/form/form-date-picker";
 import { FormInput } from "@/components/form/form-input";
 import { FormInputSkeleton } from "@/components/form/form-input-sleleton";
@@ -77,16 +78,13 @@ export function CreateTransactionSheet() {
 							label="Descrição"
 							placeholder="Ex: Supermercado"
 						/>
-
 						<FormMoneyInput
 							form={form}
 							entity="amount"
 							label="Valor"
 							placeholder="Ex: 1.000,00"
 						/>
-
 						<FormDatePicker form={form} entity="date" label="Data" />
-
 						<FormToggleGroup
 							form={form}
 							entity="type"
@@ -96,14 +94,12 @@ export function CreateTransactionSheet() {
 							alwaysSelected={true}
 							onChange={() => form.clearErrors()}
 						/>
-
 						{isLoadingGetBankAccounts && (
 							<FormInputSkeleton
 								label="Conta bancária"
 								message="Carregando contas bancárias"
 							/>
 						)}
-
 						{!isLoadingGetBankAccounts && (
 							<FormBankAccountCombobox
 								form={form}
@@ -114,6 +110,14 @@ export function CreateTransactionSheet() {
 								options={bankAccountsOptions}
 							/>
 						)}
+
+						<FormCategoryCombobox
+							form={form}
+							entity="categoryId"
+							translatedEntity="Categoria"
+							placeholder="Selecione uma categoria"
+							emptyMessage="Nenhuma categoria encontrada"
+						/>
 
 						<SheetFooter>
 							<SheetClose asChild>

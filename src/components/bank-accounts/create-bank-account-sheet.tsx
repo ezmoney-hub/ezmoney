@@ -43,13 +43,13 @@ export function CreateBankAccountForm() {
 			<SheetTrigger asChild>
 				<Button className="ml-auto" variant="outline">
 					<Plus />
-					Adicionar Conta Bancária
+					Nova Conta Bancária
 				</Button>
 			</SheetTrigger>
 
 			<SheetContent className="w-[500px]">
 				<SheetHeader>
-					<SheetTitle>Adicionar Conta Bancária</SheetTitle>
+					<SheetTitle>Nova Conta Bancária</SheetTitle>
 					<SheetDescription>
 						Adicione uma nova conta bancária para organizar suas finanças. Ela
 						pode ser uma conta bancária ou um cartão de crédito.

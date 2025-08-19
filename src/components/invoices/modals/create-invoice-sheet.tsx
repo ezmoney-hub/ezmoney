@@ -2,7 +2,6 @@
 import { Plus } from "lucide-react";
 import { FormDatePicker } from "@/components/form/form-date-picker";
 import { FormInput } from "@/components/form/form-input";
-import { FormInputSkeleton } from "@/components/form/form-input-sleleton";
 import { FormMoneyInput } from "@/components/form/form-money-input";
 import { SubmitButton } from "@/components/form/form-submit-button";
 import { FormTextarea } from "@/components/form/form-textarea";
@@ -19,10 +18,9 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { useGetCategories } from "@/hooks/categories/use-get-categories";
 import { useCreateInvoice } from "@/hooks/invoices/use-create-invoice";
 import { formatCurrency } from "@/utils/format-currency";
-import { FormCategoryCombobox } from "./form-category-combobox";
+import { FormCategoryCombobox } from "../../form/form-category-combobox";
 
 const invoiceTypeOptions = [
 	{
@@ -47,8 +45,6 @@ export function CreateInvoiceForm() {
 		setIsCreateInvoiceSheetOpen,
 	} = useCreateInvoice();
 
-	const { categories, isLoadingGetCategories } = useGetCategories();
-
 	return (
 		<Sheet
 			open={isCreateInvoiceSheetOpen}
@@ -57,13 +53,13 @@ export function CreateInvoiceForm() {
 			<SheetTrigger asChild>
 				<Button className="ml-auto" variant="outline">
 					<Plus />
-					Adicionar Fatura
+					Nova Fatura
 				</Button>
 			</SheetTrigger>
 
 			<SheetContent className="w-[700px]">
 				<SheetHeader>
-					<SheetTitle>Adicionar Fatura</SheetTitle>
+					<SheetTitle>Nova Fatura</SheetTitle>
 					<SheetDescription>
 						Crie uma nova fatura para organizar suas finanças.
 					</SheetDescription>
@@ -141,27 +137,13 @@ export function CreateInvoiceForm() {
 							</div>
 						</div>
 
-						{isLoadingGetCategories && (
-							<FormInputSkeleton
-								label="Categoria"
-								message="Carregando categorias"
-							/>
-						)}
-
-						{!isLoadingGetCategories && (
-							<FormCategoryCombobox
-								form={form}
-								entity="categoryId"
-								translatedEntity="Categoria"
-								placeholder="Selecione uma categoria"
-								emptyMessage="Nenhuma categoria encontrada"
-								options={categories.map((category) => ({
-									label: category.name,
-									value: category.id,
-									color: category.color,
-								}))}
-							/>
-						)}
+						<FormCategoryCombobox
+							form={form}
+							entity="categoryId"
+							translatedEntity="Categoria"
+							placeholder="Selecione uma categoria"
+							emptyMessage="Nenhuma categoria encontrada"
+						/>
 
 						<SheetFooter>
 							<SheetClose asChild>

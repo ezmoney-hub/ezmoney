@@ -1,0 +1,520 @@
+---
+alwaysApply: false
+---
+# 📋 Form Components Guide
+
+This document specifies when and how to use the form components available in the `src/components/form/` folder for more complex fields that require formatting, masks, or special behaviors.
+
+## 🎯 General Rules
+
+**ALWAYS use components from this folder when:**
+
+- The field requires specific formatting (e.g., phone, CPF, money)
+- The field needs complex visual validation
+- The field behaves differently from a basic input
+- The field requires input masking
+
+## 📱 Fields with Masks and Formatting
+
+### 💰 FormMoneyInput
+
+**When to use:** For all monetary fields
+
+```tsx
+// ✅ Correct - Price/value field
+<FormMoneyInput
+  form={form}
+  entity="price"
+  label="Price"
+  placeholder="$0.00"
+/>
+
+// ❌ Avoid - Common input for money
+<FormInput type="number" entity="price" />
+```
+
+### 📞 Phone Fields
+
+**To implement:** Use `FormInput` with custom mask or create a `FormPhoneInput`
+
+```tsx
+// Recommended implementation (to be created):
+<FormPhoneInput
+	form={form}
+	entity="phone"
+	label="Phone"
+	placeholder="(11) 99999-9999"
+/>
+```
+
+### 📄 Document Fields (CPF/CNPJ)
+
+**To implement:** Create specific components with masks
+
+```tsx
+// Components to be created:
+<FormCPFInput form={form} entity="cpf" label="CPF" />
+<FormCNPJInput form={form} entity="cnpj" label="CNPJ" />
+```
+
+## 📅 Date and Time Fields
+
+### 📅 FormDatePicker
+
+**When to use:** For individual date selection
+
+```tsx
+// ✅ Correct - Birth date, due date, etc.
+<FormDatePicker form={form} entity="birthDate" label="Birth Date" />
+```
+
+### 📅 FormDateRangePicker
+
+**When to use:** For periods and date ranges
+
+```tsx
+// ✅ Correct - Reports, period filters
+<FormDateRangePicker form={form} entity="dateRange" label="Period" />
+```
+
+## 🎨 Visual and Media Fields
+
+### 🎨 FormColorPicker
+
+**When to use:** For color selection in categories, themes, etc.
+
+```tsx
+// ✅ Correct - Category color, custom theme
+<FormColorPicker
+	form={form}
+	entity="categoryColor"
+	label="Category Color"
+	defaultColor="#3B82F6"
+/>
+```
+
+### 📁 FormFileInput
+
+**When to use:** For file uploads, images, documents
+
+```tsx
+// ✅ Correct - Avatar, documents, attachments
+<FormFileInput
+	form={form}
+	entity="avatar"
+	label="Profile Photo"
+	accept="image/*"
+	buttonLabel="Select Image"
+/>
+```
+
+## 🔧 Selection Fields
+
+### 📋 FormSelect vs FormCombobox
+
+**FormSelect:** For small lists (up to ~20 items)
+
+```tsx
+// ✅ Correct - Status, priorities, simple categories
+<FormSelect
+	form={form}
+	entity="status"
+	translatedEntity="Status"
+	options={statusOptions}
+/>
+```
+
+**FormCombobox:** For large lists with search
+
+```tsx
+// ✅ Correct - Cities, customers, products (many items)
+<FormCombobox
+	form={form}
+	entity="customerId"
+	translatedEntity="Customer"
+	options={customerOptions}
+	emptyMessage="No customer found"
+/>
+```
+
+## 🔘 Multiple Choice Fields
+
+### 🔘 FormToggleGroup
+
+**When to use:** For visual options with icons or multiple selection
+
+```tsx
+// ✅ Correct - View types, categories with icons
+<FormToggleGroup
+	form={form}
+	entity="viewType"
+	translatedEntity="View"
+	type="single"
+	options={[
+		{ label: "List", value: "list", icon: <ListIcon /> },
+		{ label: "Grid", value: "grid", icon: <GridIcon /> },
+	]}
+/>
+```
+
+## ✅ Boolean Fields
+
+### ✅ FormCheckbox vs FormSwitch
+
+**FormCheckbox:** For agreements, terms, isolated options
+
+```tsx
+// ✅ Correct - Terms of service, newsletter
+<FormCheckbox
+	form={form}
+	entity="agreeToTerms"
+	label="I agree to the terms of service"
+/>
+```
+
+**FormSwitch:** For on/off settings, features
+
+```tsx
+// ✅ Correct - Notifications, dark mode, features
+<FormSwitch
+	form={form}
+	entity="notifications"
+	label="Notifications"
+	description="Receive email notifications"
+/>
+```
+
+## 📝 Text Fields
+
+### 📝 FormInput vs FormTextarea
+
+**FormInput:** For short text (up to ~100 characters)
+
+```tsx
+// ✅ Correct - Name, email, title
+<FormInput form={form} entity="name" label="Name" type="text" />
+```
+
+**FormTextarea:** For long text
+
+```tsx
+// ✅ Correct - Description, notes, comments
+<FormInput
+	form={form}
+	entity="description"
+	label="Description"
+	type="textarea"
+/>
+```
+
+## 🚫 Anti-Patterns (Avoid)
+
+### ❌ DON'T use FormInput for:
+
+- Monetary values → Use `FormMoneyInput`
+- Date selection → Use `FormDatePicker`
+- File uploads → Use `FormFileInput`
+- Option lists → Use `FormSelect` or `FormCombobox`
+- Colors → Use `FormColorPicker`
+
+### ❌ DON'T use complex components for:
+
+- Simple text fields → Use `FormInput`
+- Simple Yes/No without description → Use `FormCheckbox`
+
+## 🔮 Future Components (To Implement)
+
+### Required Input Masks:
+
+- `FormPhoneInput` - Phone: (11) 99999-9999
+- `FormCPFInput` - CPF: 999.999.999-99
+- `FormCNPJInput` - CNPJ: 99.999.999/9999-99
+- `FormCEPInput` - ZIP Code: 99999-999
+- `FormCreditCardInput` - Card: 9999 9999 9999 9999
+
+### Advanced Components:
+
+- `FormAddressInput` - Complete address with ZIP code search
+- `FormImageCropper` - Upload with image cropping
+- `FormSignature` - Digital signature
+- `FormRating` - Star rating
+- `FormSlider` - Slider control for values
+
+## 📖 How to Use This Guide
+
+1. **Before creating a field:** Consult this document
+2. **Identify the data type:** Text, number, date, selection, etc.
+3. **Check if formatting is needed:** Mask, visual validation, etc.
+4. **Choose the appropriate component:** Based on the specifications above
+5. **If the component doesn't exist:** Add to the "Future" list and implement
+
+## 🎯 Benefits of Following This Guide
+
+- ✅ **Consistency:** Uniform interface throughout the app
+- ✅ **Better UX:** Components optimized for each use case
+- ✅ **Maintainability:** Standardized and reusable code
+- ✅ **Accessibility:** Components follow A11y standards
+- ✅ **Performance:** Components optimized for each context
+
+---
+
+**💡 Remember:** This is a living document. Update it as new components are created or use cases are identified.
+
+# 📋 Form Components Guide
+
+This document specifies when and how to use the form components available in the `src/components/form/` folder for more complex fields that require formatting, masks, or special behaviors.
+
+## 🎯 General Rules
+
+**ALWAYS use components from this folder when:**
+
+- The field requires specific formatting (e.g., phone, CPF, money)
+- The field needs complex visual validation
+- The field behaves differently from a basic input
+- The field requires input masking
+
+## 📱 Fields with Masks and Formatting
+
+### 💰 FormMoneyInput
+
+**When to use:** For all monetary fields
+
+```tsx
+// ✅ Correct - Price/value field
+<FormMoneyInput
+  form={form}
+  entity="price"
+  label="Price"
+  placeholder="$0.00"
+/>
+
+// ❌ Avoid - Common input for money
+<FormInput type="number" entity="price" />
+```
+
+### 📞 Phone Fields
+
+**To implement:** Use `FormInput` with custom mask or create a `FormPhoneInput`
+
+```tsx
+// Recommended implementation (to be created):
+<FormPhoneInput
+	form={form}
+	entity="phone"
+	label="Phone"
+	placeholder="(11) 99999-9999"
+/>
+```
+
+### 📄 Document Fields (CPF/CNPJ)
+
+**To implement:** Create specific components with masks
+
+```tsx
+// Components to be created:
+<FormCPFInput form={form} entity="cpf" label="CPF" />
+<FormCNPJInput form={form} entity="cnpj" label="CNPJ" />
+```
+
+## 📅 Date and Time Fields
+
+### 📅 FormDatePicker
+
+**When to use:** For individual date selection
+
+```tsx
+// ✅ Correct - Birth date, due date, etc.
+<FormDatePicker form={form} entity="birthDate" label="Birth Date" />
+```
+
+### 📅 FormDateRangePicker
+
+**When to use:** For periods and date ranges
+
+```tsx
+// ✅ Correct - Reports, period filters
+<FormDateRangePicker form={form} entity="dateRange" label="Period" />
+```
+
+## 🎨 Visual and Media Fields
+
+### 🎨 FormColorPicker
+
+**When to use:** For color selection in categories, themes, etc.
+
+```tsx
+// ✅ Correct - Category color, custom theme
+<FormColorPicker
+	form={form}
+	entity="categoryColor"
+	label="Category Color"
+	defaultColor="#3B82F6"
+/>
+```
+
+### 📁 FormFileInput
+
+**When to use:** For file uploads, images, documents
+
+```tsx
+// ✅ Correct - Avatar, documents, attachments
+<FormFileInput
+	form={form}
+	entity="avatar"
+	label="Profile Photo"
+	accept="image/*"
+	buttonLabel="Select Image"
+/>
+```
+
+## 🔧 Selection Fields
+
+### 📋 FormSelect vs FormCombobox
+
+**FormSelect:** For small lists (up to ~20 items)
+
+```tsx
+// ✅ Correct - Status, priorities, simple categories
+<FormSelect
+	form={form}
+	entity="status"
+	translatedEntity="Status"
+	options={statusOptions}
+/>
+```
+
+**FormCombobox:** For large lists with search
+
+```tsx
+// ✅ Correct - Cities, customers, products (many items)
+<FormCombobox
+	form={form}
+	entity="customerId"
+	translatedEntity="Customer"
+	options={customerOptions}
+	emptyMessage="No customer found"
+/>
+```
+
+## 🔘 Multiple Choice Fields
+
+### 🔘 FormToggleGroup
+
+**When to use:** For visual options with icons or multiple selection
+
+```tsx
+// ✅ Correct - View types, categories with icons
+<FormToggleGroup
+	form={form}
+	entity="viewType"
+	translatedEntity="View"
+	type="single"
+	options={[
+		{ label: "List", value: "list", icon: <ListIcon /> },
+		{ label: "Grid", value: "grid", icon: <GridIcon /> },
+	]}
+/>
+```
+
+## ✅ Boolean Fields
+
+### ✅ FormCheckbox vs FormSwitch
+
+**FormCheckbox:** For agreements, terms, isolated options
+
+```tsx
+// ✅ Correct - Terms of service, newsletter
+<FormCheckbox
+	form={form}
+	entity="agreeToTerms"
+	label="I agree to the terms of service"
+/>
+```
+
+**FormSwitch:** For on/off settings, features
+
+```tsx
+// ✅ Correct - Notifications, dark mode, features
+<FormSwitch
+	form={form}
+	entity="notifications"
+	label="Notifications"
+	description="Receive email notifications"
+/>
+```
+
+## 📝 Text Fields
+
+### 📝 FormInput vs FormTextarea
+
+**FormInput:** For short text (up to ~100 characters)
+
+```tsx
+// ✅ Correct - Name, email, title
+<FormInput form={form} entity="name" label="Name" type="text" />
+```
+
+**FormTextarea:** For long text
+
+```tsx
+// ✅ Correct - Description, notes, comments
+<FormInput
+	form={form}
+	entity="description"
+	label="Description"
+	type="textarea"
+/>
+```
+
+## 🚫 Anti-Patterns (Avoid)
+
+### ❌ DON'T use FormInput for:
+
+- Monetary values → Use `FormMoneyInput`
+- Date selection → Use `FormDatePicker`
+- File uploads → Use `FormFileInput`
+- Option lists → Use `FormSelect` or `FormCombobox`
+- Colors → Use `FormColorPicker`
+
+### ❌ DON'T use complex components for:
+
+- Simple text fields → Use `FormInput`
+- Simple Yes/No without description → Use `FormCheckbox`
+
+## 🔮 Future Components (To Implement)
+
+### Required Input Masks:
+
+- `FormPhoneInput` - Phone: (11) 99999-9999
+- `FormCPFInput` - CPF: 999.999.999-99
+- `FormCNPJInput` - CNPJ: 99.999.999/9999-99
+- `FormCEPInput` - ZIP Code: 99999-999
+- `FormCreditCardInput` - Card: 9999 9999 9999 9999
+
+### Advanced Components:
+
+- `FormAddressInput` - Complete address with ZIP code search
+- `FormImageCropper` - Upload with image cropping
+- `FormSignature` - Digital signature
+- `FormRating` - Star rating
+- `FormSlider` - Slider control for values
+
+## 📖 How to Use This Guide
+
+1. **Before creating a field:** Consult this document
+2. **Identify the data type:** Text, number, date, selection, etc.
+3. **Check if formatting is needed:** Mask, visual validation, etc.
+4. **Choose the appropriate component:** Based on the specifications above
+5. **If the component doesn't exist:** Add to the "Future" list and implement
+
+## 🎯 Benefits of Following This Guide
+
+- ✅ **Consistency:** Uniform interface throughout the app
+- ✅ **Better UX:** Components optimized for each use case
+- ✅ **Maintainability:** Standardized and reusable code
+- ✅ **Accessibility:** Components follow A11y standards
+- ✅ **Performance:** Components optimized for each context
+
+---
+
+**💡 Remember:** This is a living document. Update it as new components are created or use cases are identified.

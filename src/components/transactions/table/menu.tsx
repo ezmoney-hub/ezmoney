@@ -27,12 +27,12 @@ export function TransactionActions({ transaction }: TransactionActionsProps) {
 
 			<DropdownMenuContent className="w-56" align="end">
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownMenuItem disabled>
 						<Eye className="mr-2 h-4 w-4" />
 						Visualizar
 					</DropdownMenuItem>
 
-					<DropdownMenuItem>
+					<DropdownMenuItem disabled>
 						<SquarePen className="mr-2 h-4 w-4" />
 						Editar
 					</DropdownMenuItem>

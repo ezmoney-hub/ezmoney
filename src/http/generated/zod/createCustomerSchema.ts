@@ -44,9 +44,9 @@ export const createCustomer409Schema = z
 export const createCustomerMutationRequestSchema = z
   .object({
     name: z.string().min(1),
-    email: z.string().email(),
+    email: z.string().email().optional(),
     description: z.string().optional(),
-    phone: z.string().min(1),
+    phone: z.string().optional(),
   })
   .describe('Create customer request body')
 
