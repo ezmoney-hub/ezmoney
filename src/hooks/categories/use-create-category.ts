@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import type { HTTPErrorResponse, HTTPSuccessResponse } from "@/@types/http";
+import { getCategoriesQueryKey } from "@/http/generated";
 import { api } from "@/lib/axios";
 import { queryClient } from "@/lib/react-query";
 import { useFormMutation } from "../form/use-form-mutation";
@@ -35,7 +36,7 @@ export async function createCategory(
 export function useCreateCategory() {
 	const [isCreateCategorySheetOpen, setIsCreateCategorySheetOpen] =
 		useState(false);
-		
+
 	const form = useFormMutation({
 		schema: createCategorySchema,
 		defaultValues: {
@@ -52,7 +53,7 @@ export function useCreateCategory() {
 			mutationFn: createCategory,
 			onSuccess: (response) => {
 				if (response.success) {
-					queryClient.invalidateQueries({ queryKey: ["get-categories"] });
+					queryClient.invalidateQueries({ queryKey: getCategoriesQueryKey() });
 					setIsCreateCategorySheetOpen(false);
 					form.reset();
 					toast.success("Categoria criada com sucesso");

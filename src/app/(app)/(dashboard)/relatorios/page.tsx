@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ReportsCharts } from "@/reports/charts/charts";
-import { ReportsSummary } from "@/reports/summary/summary";
+import { ReportsCharts } from "@/components/reports/charts/charts";
+import { ReportsSummary } from "@/components/reports/summary/summary";
 
 export const metadata: Metadata = {
 	title: "Relatórios | EZMoney",

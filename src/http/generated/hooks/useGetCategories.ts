@@ -3,26 +3,44 @@
  * Do not edit manually.
  */
 
-import fetch from '@kubb/plugin-client/clients/axios'
-import type { GetCategoriesQueryResponse, GetCategories400 } from '../types/GetCategories'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
-import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from '@tanstack/react-query'
-import { getCategories } from '../axios/getCategories'
-import { queryOptions, useQuery } from '@tanstack/react-query'
+import type fetch from "@kubb/plugin-client/clients/axios";
+import type {
+	RequestConfig,
+	ResponseErrorConfig,
+} from "@kubb/plugin-client/clients/axios";
+import type {
+	QueryClient,
+	QueryKey,
+	QueryObserverOptions,
+	UseQueryResult,
+} from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
+import { getCategories } from "../axios/getCategories";
+import type {
+	GetCategories400,
+	GetCategoriesQueryResponse,
+} from "../types/GetCategories";
 
-export const getCategoriesQueryKey = () => [{ url: '/categories' }] as const
+export const getCategoriesQueryKey = () => [{ url: "/categories" }] as const;
 
-export type GetCategoriesQueryKey = ReturnType<typeof getCategoriesQueryKey>
+export type GetCategoriesQueryKey = ReturnType<typeof getCategoriesQueryKey>;
 
-export function getCategoriesQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
-  const queryKey = getCategoriesQueryKey()
-  return queryOptions<GetCategoriesQueryResponse, ResponseErrorConfig<GetCategories400>, GetCategoriesQueryResponse, typeof queryKey>({
-    queryKey,
-    queryFn: async ({ signal }) => {
-      config.signal = signal
-      return getCategories(config)
-    },
-  })
+export function getCategoriesQueryOptions(
+	config: Partial<RequestConfig> & { client?: typeof fetch } = {}
+) {
+	const queryKey = getCategoriesQueryKey();
+	return queryOptions<
+		GetCategoriesQueryResponse,
+		ResponseErrorConfig<GetCategories400>,
+		GetCategoriesQueryResponse,
+		typeof queryKey
+	>({
+		queryKey,
+		queryFn: async ({ signal }) => {
+			config.signal = signal;
+			return getCategories(config);
+		},
+	});
 }
 
 /**
@@ -30,30 +48,43 @@ export function getCategoriesQueryOptions(config: Partial<RequestConfig> & { cli
  * {@link /categories}
  */
 export function useGetCategories<
-  TData = GetCategoriesQueryResponse,
-  TQueryData = GetCategoriesQueryResponse,
-  TQueryKey extends QueryKey = GetCategoriesQueryKey,
+	TData = GetCategoriesQueryResponse,
+	TQueryData = GetCategoriesQueryResponse,
+	TQueryKey extends QueryKey = GetCategoriesQueryKey
 >(
-  options: {
-    query?: Partial<QueryObserverOptions<GetCategoriesQueryResponse, ResponseErrorConfig<GetCategories400>, TData, TQueryData, TQueryKey>> & {
-      client?: QueryClient
-    }
-    client?: Partial<RequestConfig> & { client?: typeof fetch }
-  } = {},
+	options: {
+		query?: Partial<
+			QueryObserverOptions<
+				GetCategoriesQueryResponse,
+				ResponseErrorConfig<GetCategories400>,
+				TData,
+				TQueryData,
+				TQueryKey
+			>
+		> & {
+			client?: QueryClient;
+		};
+		client?: Partial<RequestConfig> & { client?: typeof fetch };
+	} = {}
 ) {
-  const { query: { client: queryClient, ...queryOptions } = {}, client: config = {} } = options ?? {}
-  const queryKey = queryOptions?.queryKey ?? getCategoriesQueryKey()
+	const {
+		query: { client: queryClient, ...queryOptions } = {},
+		client: config = {},
+	} = options ?? {};
+	const queryKey = queryOptions?.queryKey ?? getCategoriesQueryKey();
 
-  const query = useQuery(
-    {
-      ...getCategoriesQueryOptions(config),
-      queryKey,
-      ...queryOptions,
-    } as unknown as QueryObserverOptions,
-    queryClient,
-  ) as UseQueryResult<TData, ResponseErrorConfig<GetCategories400>> & { queryKey: TQueryKey }
+	const query = useQuery(
+		{
+			...getCategoriesQueryOptions(config),
+			queryKey,
+			...queryOptions,
+		} as unknown as QueryObserverOptions,
+		queryClient
+	) as UseQueryResult<TData, ResponseErrorConfig<GetCategories400>> & {
+		queryKey: TQueryKey;
+	};
 
-  query.queryKey = queryKey as TQueryKey
+	query.queryKey = queryKey as TQueryKey;
 
-  return query
+	return query;
 }

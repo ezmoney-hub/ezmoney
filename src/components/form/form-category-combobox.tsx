@@ -53,6 +53,7 @@ export function FormCategoryCombobox<TFieldValues extends FieldValues>({
 	const [hasRequestedCreate, setHasRequestedCreate] = useState(false);
 
 	const { createCategory, isLoadingCreateCategory } = useCreateCategory();
+	
 	const { data: categories, isLoading: isLoadingGetCategories } =
 		useGetCategories();
 

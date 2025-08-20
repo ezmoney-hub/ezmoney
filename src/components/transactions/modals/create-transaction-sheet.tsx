@@ -78,13 +78,16 @@ export function CreateTransactionSheet() {
 							label="Descrição"
 							placeholder="Ex: Supermercado"
 						/>
+
 						<FormMoneyInput
 							form={form}
 							entity="amount"
 							label="Valor"
 							placeholder="Ex: 1.000,00"
 						/>
+
 						<FormDatePicker form={form} entity="date" label="Data" />
+
 						<FormToggleGroup
 							form={form}
 							entity="type"
@@ -94,12 +97,14 @@ export function CreateTransactionSheet() {
 							alwaysSelected={true}
 							onChange={() => form.clearErrors()}
 						/>
+
 						{isLoadingGetBankAccounts && (
 							<FormInputSkeleton
 								label="Conta bancária"
 								message="Carregando contas bancárias"
 							/>
 						)}
+
 						{!isLoadingGetBankAccounts && (
 							<FormBankAccountCombobox
 								form={form}
