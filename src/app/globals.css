@@ -136,3 +136,13 @@ input:-webkit-autofill:focus {
 	-webkit-box-shadow: 0 0 0 1000px #151515 inset !important;
 	-webkit-text-fill-color: #fff !important;
 }
+
+@layer utilities {
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+}

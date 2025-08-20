@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { InvoicesSummary } from "@/components/invoices/summary/summary";
-import { InvoicesTableContainer } from "@/components/invoices/table/container";
+import { DashboardChartsContainer } from "@/components/dashboard/charts/container";
+import { TransactionsSummary } from "@/components/transactions/summary/summary";
 
 export const metadata: Metadata = {
 	title: "Dashboard | EZMoney",
@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
 	return (
-		<div className="w-full space-y-6">
-			<InvoicesSummary />
+		<div className="w-full space-y-6 flex flex-col">
+			<TransactionsSummary />
 
-			<InvoicesTableContainer />
+			<DashboardChartsContainer />
 		</div>
 	);
 }
