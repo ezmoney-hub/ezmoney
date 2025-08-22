@@ -41,11 +41,11 @@ export const pages = [
 		icon: PiggyBank,
 		label: "Orçamentos",
 	},
-	{
-		href: "/relatorios",
-		icon: BarChart,
-		label: "Relatórios",
-	},
+	// {
+	// 	href: "/relatorios",
+	// 	icon: BarChart,
+	// 	label: "Relatórios",
+	// },
 	{
 		href: "/categorias",
 		icon: Tag,

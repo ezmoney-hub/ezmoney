@@ -28,16 +28,16 @@ export function ExpensesByCategoryChart() {
 		{ category: "Streaming", amount: 220, color: "bg-violet-500" },
 		{ category: "Petshop", amount: 200, color: "bg-amber-500" },
 		{ category: "Casa & Jardim", amount: 180, color: "bg-green-500" },
+		{ category: "Outros", amount: 160, color: "bg-gray-500" },
 		{ category: "Presentes", amount: 150, color: "bg-fuchsia-500" },
 		{ category: "Livros", amount: 130, color: "bg-slate-500" },
 		{ category: "Restaurantes", amount: 120, color: "bg-stone-500" },
 		{ category: "Farmácia", amount: 110, color: "bg-sky-500" },
-		{ category: "Outros", amount: 160, color: "bg-gray-500" },
-	];
+	].sort((a, b) => b.amount - a.amount);
 
 	return (
-		<Card className="p-6 border-border h-full">
-			<CardHeader>
+		<Card className="p-6 border-border h-full max-h-full">
+			<CardHeader className="p-0">
 				<CardTitle>Gastos por Categoria</CardTitle>
 
 				<CardDescription>Agosto 2024 - Agosto 2025</CardDescription>
@@ -55,7 +55,7 @@ export function ExpensesByCategoryChart() {
 				</div>
 			</CardHeader>
 
-			<div className="mb-6 max-h-[400px]">
+			<div className="mb-6">
 				<div className="flex h-6 overflow-hidden">
 					{expenseCategories.map((category) => {
 						const percentage = (category.amount / totalExpenses) * 100;
@@ -63,7 +63,7 @@ export function ExpensesByCategoryChart() {
 						return (
 							<div
 								key={category.category}
-								className={category.color}
+								className={`${category.color} mr-[3px]`}
 								style={{ width: `${percentage}%` }}
 								title={`${category.category}: ${percentage.toFixed(1)}%`}
 							/>
@@ -72,7 +72,7 @@ export function ExpensesByCategoryChart() {
 				</div>
 			</div>
 
-			<div className="max-h-[300px] overflow-y-auto space-y-3 pr-2 scrollbar-hide">
+			<div className="max-h-[200px] overflow-y-auto space-y-3 pr-2 scrollbar-hide">
 				{expenseCategories.map((category) => (
 					<div
 						key={category.category}
