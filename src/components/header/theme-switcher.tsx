@@ -4,6 +4,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "../ui/skeleton";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+	ComputerIcon,
+	Moon02Icon,
+	Sun02Icon,
+} from "@hugeicons/core-free-icons";
 
 export function ThemeSwitcher() {
 	const { theme, setTheme } = useTheme();
@@ -31,11 +37,11 @@ export function ThemeSwitcher() {
 			aria-label="Toggle theme"
 		>
 			{theme === "light" ? (
-				<Sun size={20} />
+				<HugeiconsIcon icon={Sun02Icon} />
 			) : theme === "dark" ? (
-				<Moon size={20} />
+				<HugeiconsIcon icon={Moon02Icon} />
 			) : (
-				<Monitor size={20} />
+				<HugeiconsIcon icon={ComputerIcon} />
 			)}
 		</Button>
 	);

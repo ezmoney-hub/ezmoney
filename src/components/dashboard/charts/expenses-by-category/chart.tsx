@@ -72,7 +72,7 @@ export function ExpensesByCategoryChart() {
 				</div>
 			</div>
 
-			<div className="max-h-[200px] overflow-y-auto space-y-3 pr-2 scrollbar-hide">
+			<div className="overflow-y-auto space-y-3 pr-2 scrollbar-hide">
 				{expenseCategories.map((category) => (
 					<div
 						key={category.category}

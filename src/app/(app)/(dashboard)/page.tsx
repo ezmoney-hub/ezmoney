@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
 	return (
-		<div className="w-full space-y-6 flex flex-col">
+		<div className="w-full space-y-6 flex flex-col pb-6">
 			<ReportsSummary />
 
 			<DashboardChartsContainer />

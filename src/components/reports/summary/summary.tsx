@@ -17,7 +17,7 @@ export function ReportsSummary() {
 	}
 
 	return (
-		<div className="w-full flex flex-wrap md:flex-nowrap gap-4">
+		<div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 			<ReportsSummaryCard
 				label="Entradas"
 				value={summary.income.value}

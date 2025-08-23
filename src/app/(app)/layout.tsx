@@ -12,7 +12,7 @@ export default function AppLayout({
 				<Sidebar />
 			</aside>
 
-			<main className="flex-1 flex flex-col h-full overflow-hidden pb-6">
+			<main className="flex-1 flex flex-col h-full overflow-hidden">
 				<Header />
 
 				<div className="w-full flex-1 py-1 px-6 flex overflow-auto">{children}</div>

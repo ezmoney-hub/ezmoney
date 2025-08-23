@@ -23,16 +23,15 @@ Um dashboard completo de controle de finanças que permite gerenciar transaçõe
 
 ## Funcionalidades
 
-- [ ] Autenticação com email e senha.
+- [x] Autenticação com email e senha.
 - [ ] Autenticação com Google.
-- [ ] Modo noturno.
+- [x] Modo noturno.
 - [ ] Design responsivo.
 - [ ] Dashboard com gráficos gerais sobre suas finanças.
-- [ ] Gerencimento completo de faturas.
-- [ ] Gerenciamento completo de transações.
+- [x] Gerencimento completo de faturas.
+- [x] Gerenciamento completo de transações.
+- [x] Gerenciamento completo de contas bancárias.
 - [ ] Gerenciamento completo de orçamentos.
-- [ ] Gerenciamento completo de contas bancárias.
-- [ ] Calendário de pagamentos.
 
 ## Instalação
 
@@ -59,6 +58,7 @@ BETTER_AUTH_SECRET=
 ## Executando o Projeto
 
 Inicie o servidor:
+
 ```bash
 pnpm dev
 ```

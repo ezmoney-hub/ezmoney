@@ -1,9 +1,10 @@
 "use client";
-import { Bell } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { pages } from "@/mocks/pages";
 import { Button } from "../ui/button";
 import { ThemeSwitcher } from "./theme-switcher";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Notification01Icon } from "@hugeicons/core-free-icons";
 
 export function Header() {
 	const pathname = usePathname();
@@ -20,7 +21,7 @@ export function Header() {
 				<ThemeSwitcher />
 
 				<Button variant="outline" size="icon">
-					<Bell />
+					<HugeiconsIcon icon={Notification01Icon} />
 				</Button>
 			</div>
 		</header>
